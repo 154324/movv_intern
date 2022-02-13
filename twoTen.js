@@ -196,4 +196,19 @@ function sumSalaries(department) {
           else return  n+sumTo(n-1);
   }
 
-  console.log(sumTo(100))
+ // 팩토리얼 계산하기
+ function fibo(n){
+     if(n <= 1) return n
+     else fibo(n-1)+fibo(n-2)
+
+ }
+
+ //단일 연결 리스트 출력하기
+
+ function printList(list){
+         console.log(list.value)
+     if(list.next)
+         {
+             printList(list.next)
+         }
+ }
