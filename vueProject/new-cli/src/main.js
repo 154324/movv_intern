@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router';
-import store from './store';
 
-createApp(App).use(store).use(router).use(vuetify).mount('#app');
+import store from './store';
+import status from './views/status';
+
+createApp(App).use(store).component('status', status).mount('#app');
