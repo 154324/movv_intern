@@ -16,18 +16,29 @@
       //   //정의할 내용
 
       // })//객체의 동작을 재정의 한다, 우리 마음대로 재정의할 수 있다.
+      (function () {
+        //즉시 실행 함수: 정의 되자마자 즉시 실행되는 자바스크립트 기능이다.
+        function init() {
+          //일반적으로 전역 스코프를 오염시키지 않고 처리가 가능하다.
+          Object.defineProperty(viewModel, 'str', {
+            //속성에 접근했을 때의 동작을 정의
+            get: function () {
+              console.log('접근');
+            },
+            //속성에 값을 할당했을 때의 동작을 정의
+            set: function (newValue) {
+              console.log('할당', newValue);
+              render(newValue);
+            },
+          });
+        }
 
-      Object.defineProperty(viewModel, 'str', {
-        //속성에 접근했을 때의 동작을 정의
-        get: function () {
-          console.log('접근');
-        },
-        //속성에 값을 할당했을 때의 동작을 정의
-        set: function (newValue) {
-          console.log('할당', newValue);
+        function render(newValue) {
           div.innerHTML = newValue; //view는 데이터 바인딩의 주목을 한다.
-        },
-      });
+        }
+
+        init();
+      })();
     </script>
   </body>
 </html>
