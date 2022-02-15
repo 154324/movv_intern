@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      {{value}}
+      <button v-on:click="changeName">값 바꾸기</button>
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            value: 'Movv_LifeCyle',
+          };
+        },
+        methods: {
+          changeName() {
+            this.value === 'Movv_LifeCycle'
+              ? (this.value = 'front_kwengwoo')
+              : (this.value = 'Movv_LifeCycle');
+          },
+        },
+
+        //라이프 사이클 분석하기
+        beforeCreate() {
+          console.log(this.value); // before 에서는 인스턴스 생성전이라 defined가 나온다.
+        },
+        created() {
+          //create 이후 인스턴스가 생겨 데이터에 접근이 가능해진다.
+          console.log(this.value);
+        },
+        beforeMount() {
+          alert('beforeMount'); //Dom이 나오긴 전 상태로
+        },
+        mounted() {
+          //mount가 완료되면 lifeCycle 돔 화면이 뜬다.
+          alert('mount complete');
+        },
+        beforeUpdate() {
+          //값 바꾸기를 누르면 beforeUpadate상태를 보여준다.
+          alert('beforUpdate');
+        },
+        updated() {
+          //Updated 사이클이 완료후 vlaue 값이 바뀐것을 확인
+          alert('Update Complete!');
+        },
+        beforeDestroy() {
+          console.log('beforeDestroy');
+          //현재 dom이 꺼질 때 destroy는 메모리 누수를 방지하기 위해 데이터를 초기화 해준다.
+          alert('berforeDestroy');
+        },
+        destroyed() {
+          alert('destroyed');
+          console.log(this.value); //둘다 서버측 사이드에서 렌더링 되지 않아 다른 홈페이지로 라우터 시킬 때 사용하면 좋을 것 같다.
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>
