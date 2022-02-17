@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="(value,key) in object">{{key}} : {{value}}</li>
+      </ul>
+      <label>필터한 값들</label>
+      <input placeholder="value filter" v-model="filter" />
+      <p>{{filter}}</p>
+      <hr />
+      <p>{{filterON}}</p>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            filter: '',
+            keyss: [],
+            object: {
+              a: 1,
+              b: 2,
+              c: 3,
+              d: 4,
+              e: 1,
+              f: 4,
+            },
+          };
+        },
+        computed: {
+          filterON: function () {
+            for (key in this.object) {
+              if (this.filter == this.object[key]) this.keyss.push(key);
+              else if (this.filter == '') {
+                return (this.keyss = []);
+              }
+            }
+            return this.keyss;
+          },
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>
