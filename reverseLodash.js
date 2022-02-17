@@ -17,18 +17,19 @@
 // console.log(_reverse(arr)); //console.log [6,5,4,3,2,1]
 
 //아래에는 재귀함수로 다차원 배열도 리버스 해볼려고 합니다.
-let arr1 = [1, 2, 3, [4, 5], 6];
-const newArr = [];
+let arr1 = [1, 2, 3, [4, 5], 6, 7];
 
-function gogo(arr) {
-  for (var i = arr.length; i > 0; i--) {
-    if (!Array.isArray(arr[i - 1])) {
+function _reverse(arr) {
+  let newArr = [];
+  for (let i = arr.length; i > 0; i--) {
+    if (Array.isArray(arr[i - 1])) {
+      newArr.push(_reverse(arr[i - 1]));
+    } else {
       newArr.push(arr[i - 1]);
-      console.log(newArr);
-    } else if (Array.isArray(arr[i - 1])) {
-      gogo(arr[i - 1]);
     }
+    console.log(newArr);
   }
+  return newArr;
 }
 
-gogo(arr1);
+_reverse(arr1);
