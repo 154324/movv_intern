@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <app-header v-bind:propsdata="message"></app-header>
+        <app-content v-on:pass="logText"></app-content>
+        <app-footer v-on:increase="numPlus" v-bind:propsdata="num"></app-footer>
+    </div>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script>
+     var appHeader = {
+         template :  '<h1>{{propsdata}}</h1>',
+         props : ['propsdata']
+     }
+
+     var appFooter = {
+        template : '<div>{{propsdata}}<button v-on:click="addNumber">add</button></div>',
+        methods : {
+            addNumber : function(){
+                this.$emit('increase')
+            }
+        },
+        props :['propsdata']
+
+     }
+
+     var appContent = {
+         template : '<button v-on:click="passEvent">Clcik me</button>',
+         props : ['contents'],
+         methods : {
+             passEvent : function(){
+                 this.$emit('pass');
+             }
+         }
+     }
+      new Vue({
+          el : '#app',
+          components : {
+              'app-header': appHeader,
+              'app-footer' :appFooter,
+              'app-content' : appContent
+          },
+          data :{
+              message : 'app header',
+              num  : 10
+          },
+          methods : {
+              logText : function(){
+                  console.log('hi');
+              },
+              numPlus : function(){
+                  this.num= this.num+1;
+              }
+          }
+      });
+
+
+
+
+    </script>
+    
+</body>
+</html>
