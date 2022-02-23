@@ -8,8 +8,8 @@
   </div>
 </template>
 <script>
-import User from './components/User.vue';
-import UserDetail from './components/userDetail.vue';
+import User from './components/User.vue'
+import UserDetail from './components/userDetail.vue'
 export default {
   components: {
     User,
@@ -20,15 +20,15 @@ export default {
       title: '안녕하세요',
       count: 1,
       name: '',
-    };
+    }
   },
   methods: {
     changeName(name) {
-      console.log(name);
+      console.log(name)
 
-      this.name = name;
+      this.name = name
     },
   },
-};
+}
 </script>
 <style lang=""></style>
